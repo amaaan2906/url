@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>URL Shortener</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<header>
+			<h1>URL Shortener</h1>
+		</header>
+		<main id="app">
+			<form @submit.prevent="create()" class="form" autocomplete="off">
+				<input
+					class="input"
+					type="text"
+					placeholder="URL"
+					id="url"
+					name="url"
+					v-model="url"
+				/>
+				<input
+					class="input"
+					type="text"
+					placeholder="Alias (optional) "
+					id="slug"
+					name="slug"
+					v-model="slug"
+				/>
+				<button class="submit-btn" type="submit">+</button>
+			</form>
+			{{ short }}
+		</main>
+		<footer>test</footer>
+		<script src="https://unpkg.com/vue@2.6.12/dist/vue.js"></script>
+		<script src="app.js"></script>
+	</body>
+</html>
