@@ -18,7 +18,7 @@ mongoose.connect(
 	() => console.log(`Connected to db!`)
 );
 
-app.use(express.static(path.join(__dirname, "client")));
+app.use(express.static(path.join(__dirname, "client/build")));
 
 //Middle wares
 app.use(morgan("tiny"));
