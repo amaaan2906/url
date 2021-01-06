@@ -11,7 +11,13 @@
 			<h1>URL Shortener</h1>
 		</header>
 		<main id="app">
-			<form @submit.prevent="create()" class="form" autocomplete="off">
+			<div class="error" v-if="error">{{ error }}</div>
+			<form
+				@submit.prevent="create()"
+				class="form"
+				autocomplete="off"
+				v-if="form"
+			>
 				<input
 					class="input"
 					type="text"
@@ -30,10 +36,22 @@
 				/>
 				<button class="submit-btn" type="submit">+</button>
 			</form>
-			{{ short }}
+			<div class="created" v-if="created">
+				<p>
+					Link shortened to:
+					<a :href="this.created" target="_blank">{{ created }}</a>
+				</p>
+				<button @click="reset()">go home</button>
+			</div>
 		</main>
-		<footer>test</footer>
-		<script src="https://unpkg.com/vue@2.6.12/dist/vue.js"></script>
+		<footer hidden>
+			<p>
+				© 2020
+				<a href="https://github.com/amaaan2906/url" target="_blank">Aman T</a> |
+				All Rights Reserved
+			</p>
+		</footer>
+		<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
 		<script src="app.js"></script>
 	</body>
 </html>

@@ -3,9 +3,17 @@ const app = new Vue({
 	data: {
 		url: "",
 		slug: "",
-		short: "",
+		created: "",
+		error: "",
+		form: true,
 	},
 	methods: {
+		reset() {
+			this.form = true;
+			this.url = "";
+			this.slug = "";
+			this.created = null;
+		},
 		async create() {
 			// console.log(`${this.url}, ${this.slug || undefined}`);
 			const response = await fetch("/to/", {
@@ -21,10 +29,19 @@ const app = new Vue({
 				}),
 			});
 			if (response.ok) {
-				this.short = await response.json();
+				const res = await response.json();
+				this.created = `${window.location.protocol}//${window.location.host}/to/${res.slug}`;
+				this.error = "";
+				this.form = false;
+			} else if (response.status === 429) {
+				this.error =
+					"You are sending too many requests. Try again in 30 seconds.";
+				this.created = null;
+			} else {
+				const res = await response.json();
+				this.error = res.msg;
+				this.created = null;
 			}
-			this.url = "";
-			this.slug = "";
 		},
 	},
 });
