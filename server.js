@@ -4,16 +4,18 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const path = require("path");
 
+require("dotenv").config();
+
 // Database connect
 const mongoUser = {
-	id: "express-app",
-	pwd: "express",
+	id: process.env.MONGO_ID,
+	pwd: process.env.MONGO_PWD,
 };
 const monogURL = `mongodb+srv://${mongoUser.id}:${mongoUser.pwd}@cluster0.qniui.mongodb.net/dev?retryWrites=true&w=majority`;
 mongoose.connect(
 	monogURL,
 	{ useNewUrlParser: true, useUnifiedTopology: true },
-	() => console.log("Connected to db!")
+	() => console.log(`Connected to db!`)
 );
 
 app.use(express.static(path.join(__dirname, "client")));
