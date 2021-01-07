@@ -15,7 +15,7 @@ router.get("/:id", async (req, res, next) => {
 			exists.click += 1;
 			exists.save();
 			res.redirect(exists.url);
-		} else res.send("not found");
+		} else res.redirect("/404");
 	} catch (error) {
 		next(error);
 	}

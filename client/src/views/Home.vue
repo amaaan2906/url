@@ -1,6 +1,8 @@
 <template>
 	<div class="home">
-		<img alt="Vue logo" src="../assets/logo.png" />
+		<header>
+			<h1>Shortener</h1>
+		</header>
 	</div>
 </template>
 
@@ -9,5 +11,12 @@
 	export default {
 		name: "Home",
 		components: {},
+		data() {
+			return {
+				lightMode: false,
+			};
+		},
 	};
 </script>
+
+<style scoped></style>
