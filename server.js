@@ -18,14 +18,17 @@ mongoose.connect(
 	() => console.log(`Connected to db!`)
 );
 
-app.use(express.static(path.join(__dirname, "client/build")));
-
 //Middle wares
 app.use(morgan("tiny"));
 app.use(express.json());
 
 // Routes
 app.use("/to", require("./routes/url"));
+
+app.use(express.static("./client/dist"));
+app.get("*", (req, res) => {
+	res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));
+});
 
 // Error handler
 app.use((error, req, res, next) => {
@@ -37,7 +40,7 @@ app.use((error, req, res, next) => {
 	});
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
 	console.log(`Server running at ${PORT}`);
 });

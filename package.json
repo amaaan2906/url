@@ -4,7 +4,12 @@
 	"description": "",
 	"main": "server.js",
 	"scripts": {
-		"dev": "nodemon server.js"
+		"server": "echo \" Running Express server \" && nodemon server.js'",
+		"client": "echo \" Running Vue server \" && cd client && npm run serve",
+		"start": "echo \" Heroku start script \" && node server.js",
+		"build": "echo \" Build vue app \" && cd client && npm run build",
+		"dev2": "echo \" Build Vue app and serve on express server \" &&npm run build && npm run server",
+		"dev": "echo \" Running express and vue servers \" && concurrently \"npm run server\" \"npm run client\""
 	},
 	"keywords": [],
 	"author": "",
@@ -21,6 +26,7 @@
 		"yup": "^0.32.8"
 	},
 	"devDependencies": {
+		"concurrently": "^5.3.0",
 		"nodemon": "^2.0.7"
 	}
 }

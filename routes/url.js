@@ -7,7 +7,7 @@ const URL = require("../models/url");
 
 const { url: validURL } = require("../validation");
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
 	const { id: slug } = req.params;
 	try {
 		const exists = await URL.findOne({ slug: slug });
@@ -15,8 +15,7 @@ router.get("/:id", async (req, res) => {
 			exists.click += 1;
 			exists.save();
 			res.redirect(exists.url);
-		}
-		res.send("not found");
+		} else res.send("not found");
 	} catch (error) {
 		next(error);
 	}
